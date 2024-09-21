@@ -8,4 +8,4 @@ docker-compose up --build
 4. Open frontend/backend container.
 5. Expand the `Explorer` tab and move to `/usr/src/app` directory.
 6. Repeat above steps for the remaining container.
-7. Frontend is hosted on port `4200` and the backend is hosted on `8000`.
+7. Frontend is hosted on port `4200` and the backend is hosted on `8080`.
