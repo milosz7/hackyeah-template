@@ -1,0 +1,21 @@
+{
+	"name": "Hackyeah template",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "backend", // frontend / backend
+	"workspaceFolder": "/usr/src/app",
+	"shutdownAction": "none",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"ms-python.python"
+			]
+		}
+	},
+	"runServices": [
+		"frontend",
+		"backend"
+	]
+}
