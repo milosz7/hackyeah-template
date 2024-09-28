@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Conversation } from '../../../models/conversation';
+import { ConversationListItem } from '../../../models/conversation-list-item.model';
 import { mockedConversations } from '../../../data/mockConversationList'
 
 @Component({
@@ -21,7 +21,7 @@ export class ConversationHistoryListComponent {
 
         return `${day}-${month}-${year}`;
       }
-    conversations: Conversation[] = mockedConversations;
+    conversations: ConversationListItem[] = mockedConversations;
 
     ngOnInit(): void {
 
