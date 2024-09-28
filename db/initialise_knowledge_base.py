@@ -8,7 +8,7 @@ from pinecone import Pinecone, ServerlessSpec
 from langchain_pinecone import PineconeVectorStore
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv, find_dotenv
-from time import time
+import time
 
 
 if __name__ == "__main__":

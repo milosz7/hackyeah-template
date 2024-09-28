@@ -6,4 +6,5 @@ export const mockedConversations: ConversationListItem[] = [
         date: new Date(),
         title: "Bla Bla Bla"
     }
+
 ]
