@@ -39,6 +39,6 @@ def get_xml():
     }
     '''
 
-    json_to_xml(json_data, "dokument")
+    json_to_xml(json_data, "Deklaracja")
 
-    return "lolz"
+    return "cipka"
