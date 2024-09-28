@@ -9,11 +9,24 @@ export const mockedConversations: Conversation[] = [
     }
 ]
 
-const mockedMessages: Message[] = [
+export const mockedMessages: Message[] = [
+    {
+        id: 0,
+        date: new Date(),
+        text: "siema eniu",
+        sender: Sender.USER
+    },
+    {
+        id: 0,
+        date: new Date(),
+        text: "na wałbrzych",
+        sender: Sender.ADVISOR
+    },
     {
         id: 0,
         date: new Date(),
         text: "siema eniu",
         sender: Sender.USER
     }
+
 ]
