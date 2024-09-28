@@ -6,8 +6,11 @@ from dto.DeclarationDTO import DeclarationDTO
 from typing import List, Dict, Optional
 import uuid
 from enum import Enum
-from datetime import datetime
+from datetime import datetime, timedelta
 from pydantic import BaseModel
+from passlib.context import CryptContext
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
 
 app = FastAPI()
 
@@ -21,10 +24,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# to get a string like this run:
+# openssl rand -hex 32
+SECRET_KEY = "e85d5a41fb2fb4e4712ce13ccbecf44b6f648216427ac166f7553ecfb6ca7bda"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-# Dictionary to hold user data and conversations
-users_conversations: Dict[uuid.UUID, Dict[uuid.UUID, "Conversation"]] = {}
-users_data: Dict[uuid.UUID, "UserDTO"] = {}
 
 # Enum to define the source of the message (user or model)
 class MessageSource(str, Enum):
@@ -32,34 +39,38 @@ class MessageSource(str, Enum):
     model = "model"
 
 # Define the Message DTO with source, time, and message content
-class MessageDTO(BaseModel):
-    conversation_id: uuid.UUID
+class Message(BaseModel):
     time: datetime
     source: MessageSource
     message: str
 
 # Define the Conversation DTO (with messages being a list of MessageDTO)
 class Conversation(BaseModel):
-    user_id: uuid.UUID
     conversation_id: uuid.UUID
-    messages: List[MessageDTO]
+    messages: List[Message]
 
 # Define the User DTO with a list of conversations
-class UserDTO(BaseModel):
-    user_id: uuid.UUID
+class User(BaseModel):
     user_name: str
     conversations: List[Conversation]
+class UserInDB(User):
+    hashed_password: str
+
+# Dictionary to hold user data and conversations
+users_conversations: Dict[User, List[Conversation]] = {}
+
+
 
 dummy_user_id = uuid.uuid4()
 dummy_conversation_id = uuid.uuid4()
-
-dummy_user = UserDTO(
+dummy_user = UserInDB(
     user_id=dummy_user_id,
     user_name="test_user",
-    conversations=[]
+    conversations=[],
+    hashed_password = "asd"
 )
 
-dummy_message = MessageDTO(
+dummy_message = Message(
     conversation_id=dummy_conversation_id,
     time=datetime.now(),
     source=MessageSource.user,
@@ -72,27 +83,61 @@ dummy_conversation = Conversation(
     messages=[dummy_message]
 )
 
-# Endpoint to create a new user
-@app.post("/users", response_model=UserDTO)
-async def create_user(user_name: str):
-    # Generate a new user ID
-    user_id = uuid.uuid4()
-    
-    # Initialize an empty list of conversations for the user
-    new_user = UserDTO(
-        user_id=user_id,
-        user_name=user_name,
-        conversations=[]
-    )
-    
-    # Store the new user data in users_data and initialize their conversations in users_conversations
-    users_data[user_id] = new_user
-    users_conversations[user_id] = {}
-    
+#Database
+#########################
+def find_user_by_id(user_name):
     return dummy_user
 
+def get_user_conversations(user_name):
+    return [dummy_conversation]
+def get_user_conversation_by_id(user_name,):
+    return [dummy_conversation]
+def save_user(user: UserInDB):
+    print("saved user")
+    
+def delete_user_by_id(user_name):
+    print("deleted user")
+##########################
+
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
+
+@app.post("/register", response_model=User)
+async def register_user(username: str, password: str):
+    
+    user = find_user_by_id(username)
+    if username is not None:
+        raise HTTPException(status_code=400, detail="Username already exists!")
+    
+    hashed_password = get_password_hash(password)
+    
+    new_user = UserInDB(
+        user_name=username,
+        hashed_password=hashed_password,
+        conversations=[]
+    )
+    save_user(new_user)    
+    return new_user
+
+
+@app.post("/login")
+async def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
+    user = find_user_by_id(form_data.username)
+    if not user or not verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(status_code=400, detail="Invalid username or password")
+    
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.user_name}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
 # Endpoint to get a user by user_id
-@app.get("/users/{user_id}", response_model=UserDTO)
+@app.get("/users/{user_id}", response_model=User)
 async def get_user(user_id: uuid.UUID):
     user = users_data.get(user_id)
     if user is None:
@@ -154,7 +199,7 @@ async def post_message(user_id: uuid.UUID, conversation_id: uuid.UUID, message: 
         raise HTTPException(status_code=404, detail="Conversation not found")
     
     # Create and add the new message
-    new_message = MessageDTO(
+    new_message = Message(
         conversation_id=conversation_id,
         time=datetime.now(),
         source=MessageSource.user,  # Assuming this is a user message for now

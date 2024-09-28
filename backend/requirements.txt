@@ -2,3 +2,5 @@ fastapi[standard]==0.115.0
 pydantic>=2.7.0,<3.0.0
 black==24.8.0
 dicttoxml==1.7.4
+pyjwt==2.8.0
+passlib[bcrypt]==1.7.4
