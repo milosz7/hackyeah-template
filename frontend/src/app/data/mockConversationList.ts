@@ -1,19 +1,11 @@
-import { Conversation } from "../models/conversation"
+import { ConversationListItem } from "../models/conversation-list-item.model";
 import { Message, Sender } from "../models/message"
 
-export const mockedConversations: Conversation[] = [
+export const mockedConversations: ConversationListItem[] = [
     {
         id: 0,
         date: new Date(),
-        messages: []
+        title: "Bla Bla Bla"
     }
-]
 
-const mockedMessages: Message[] = [
-    {
-        id: 0,
-        date: new Date(),
-        text: "siema eniu",
-        sender: Sender.USER
-    }
 ]

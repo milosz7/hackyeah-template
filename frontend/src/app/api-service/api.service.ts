@@ -11,9 +11,20 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+  public getConversationHistory(): Observable<any> {
+    return this.http.get(`${this.apiUrl}` + '/');
   }
 
+  public getConversation(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}` + '/');
+  }
+
+  public postPrompt(text: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}` + '/', text);
+  }
+
+  public postCreateConversation(): Observable<any> {
+    return this.http.post(`${this.apiUrl}` + '/', null);
+  }
   
 }

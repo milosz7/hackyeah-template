@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Message, Sender } from '../../../../models/message';
 
 @Component({
     selector: 'app-conversation-tile',
@@ -14,4 +15,16 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class ConversationTileComponent {
     @Input()
     public text: string = '';
+    @Input()
+    public message: Message|any;
+    
+    public isAdvisor: Boolean = false;
+
+    ngOnInit() : void {
+        if(this.message){
+        this.isAdvisor = this.message.sender == Sender.ADVISOR;
+        }
+    }
+
+
  }

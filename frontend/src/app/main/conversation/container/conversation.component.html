@@ -1,1 +1,4 @@
-<app-conversation-tile [text]='text'/>
+
+<div class="chat-container">
+    <app-conversation-tile *ngFor="for let message of messages" [message]="message"/>
+  </div>
