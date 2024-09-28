@@ -4,13 +4,18 @@ import { Observable } from 'rxjs';
 import { ConversationState } from '../data-access/conversation.state';
 import { Message } from '../../../models/message';
 import { CreateConversation, PostPrompt } from '../data-access/conversation.actions';
+import { ConversationHistoryState } from '../../sidebar/data-access/conversation-history.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConversationPresenterService {
+
+  private currentConversationId$: Observable<number>;
   
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.currentConversationId$ = this.store.select(ConversationHistoryState.getCurrentConversationId);
+  }
 
   public sendPrompt(promptText: string): Observable<any> {
     return this.store.dispatch(new PostPrompt(promptText));

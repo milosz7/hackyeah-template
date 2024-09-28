@@ -1,6 +1,8 @@
+import { GetConversation } from './../main/conversation/data-access/conversation.actions';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { mockedConversations } from '../data/mockConversationList';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // public getConversationHistory(): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}` + '/');
+  // }
+
   public getConversationHistory(): Observable<any> {
-    return this.http.get(`${this.apiUrl}` + '/');
+    return of(mockedConversations);
   }
 
   public getConversation(id: number): Observable<any> {

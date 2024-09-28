@@ -8,8 +8,9 @@ import { ConversationListItem } from "../../../models/conversation-list-item.mod
 
 
 @State<ConversationHistoryStateModel>({
-    name: 'conversation history',
+    name: 'conversationHistory',
     defaults: {
+      selectedConversationId: 0,
       conversationHistoryListItems: []
     },
   })
@@ -22,6 +23,11 @@ import { ConversationListItem } from "../../../models/conversation-list-item.mod
     static getConversationHistoryItems(state: ConversationHistoryStateModel): ConversationListItem[] {
       return state.conversationHistoryListItems;
     }
+
+    @Selector()
+    static getCurrentConversationId(state: ConversationHistoryStateModel): number {
+      return state.selectedConversationId;
+    }
   
     @Action(GetConversationHistory)
     getConversationHistory(ctx: StateContext<ConversationHistoryStateModel>): any {
@@ -30,5 +36,10 @@ import { ConversationListItem } from "../../../models/conversation-list-item.mod
           ctx.patchState({ conversationHistoryListItems: response.items });
         })
       );
+    }
+
+    @Action(SetConversationId)
+    selectConversationId(ctx: StateContext<ConversationHistoryStateModel>, action: SetConversationId): any {
+      ctx.patchState({ selectedConversationId: action.id})
     }
   }

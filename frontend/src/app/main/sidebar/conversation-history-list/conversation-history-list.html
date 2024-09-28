@@ -1,5 +1,5 @@
 <ul class="stylish-list">
-    <li  *ngFor="for let conversation of conversations">
+    <li  *ngFor="let conversation of conversations$ | async">
         <a href="#">{{ formatDate(conversation.date) }}</a>
     </li>
 </ul>
