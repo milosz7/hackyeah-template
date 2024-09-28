@@ -1,1 +1,9 @@
-<p>{{text}}</p>
+    <!-- Sender Message Tile -->
+    <div  [ngClass]="{'sender' : this.isAdvisor===true, 'receiver' : this.isAdvisor===false, 'message-tile': true}" >
+        <div *ngIf="this.isAdvisor === true" class="icon">
+          <img src="../../../../../img/advisor_icon.png" alt="User Icon">
+        </div>
+        <div class="message">
+          <p>{{ this.message.text }}</p>
+        </div>
+      </div>
