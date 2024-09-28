@@ -11,9 +11,8 @@
           "inlineStyle": false,
           "inlineTemplate": false
         },
-          "@schematics/angular:application": {
-            "style": "scss"
-          }
+        "@schematics/angular:application": {
+          "style": "scss"
         }
       },
       "root": "",
