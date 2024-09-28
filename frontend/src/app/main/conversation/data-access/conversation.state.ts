@@ -21,10 +21,10 @@ import { ConversationStateModel } from "./state.model";
       return state.id;
     }
   
-    @Action(FetchHistoryConversations)
-    fetchHistoryConversations(ctx: StateContext<ConversationStateModel>) {
-      this.apiService.getData().
+    // @Action(FetchHistoryConversations)
+    // fetchHistoryConversations(ctx: StateContext<ConversationStateModel>) {
+    //   this.apiService.getData().
 
-      ctx.setState({ count: state.count + 1 });
-    }
+    //   ctx.setState({ count: state.count + 1 });
+    // }
   }

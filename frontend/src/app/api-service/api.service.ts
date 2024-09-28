@@ -11,8 +11,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+  public getHistoryConversations(): Observable<any> {
+    return this.http.get(`${this.apiUrl}` + '/');
   }
 
   

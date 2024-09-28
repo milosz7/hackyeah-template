@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ConversationTileComponent } from '../conversation-tile/conversation-tile.component';
+import { ConversationTileComponent } from '../components/conversation-tile/conversation-tile.component';
 
 @Component({
     selector: 'app-conversation',

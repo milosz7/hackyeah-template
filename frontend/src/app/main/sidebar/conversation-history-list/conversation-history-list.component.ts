@@ -1,17 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Conversation } from '../../models/conversation';
-import { DataViewModule } from 'primeng/dataview';
-import { VirtualScrollerModule } from 'primeng/virtualscroller';
-import { mockedConversations } from '../../data/mockConversationList'
+import { Conversation } from '../../../models/conversation';
+import { mockedConversations } from '../../../data/mockConversationList'
 
 @Component({
     selector: 'app-conversation-history-list',
     standalone: true,
     imports: [
         CommonModule,
-        DataViewModule,
-        VirtualScrollerModule
     ],
     templateUrl: `./conversation-history-list.html`,
     styleUrl: './conversation-history-list.component.css',

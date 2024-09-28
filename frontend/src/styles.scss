@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-    margin: 0;
-}
 
-p { margin: 0;}
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    height: 100vh;
+  }
