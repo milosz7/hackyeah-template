@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     imports: [
         CommonModule,
     ],
-    template: `<p>form works!</p>`,
-    styleUrl: './form.component.css',
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent { }

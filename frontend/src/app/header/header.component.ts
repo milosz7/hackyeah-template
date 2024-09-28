@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     imports: [
         CommonModule,
     ],
-    template: `<p>header works!</p>`,
-    styleUrl: './header.component.css',
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent { }

@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     imports: [
         CommonModule,
     ],
-    template: `<p>sidebar works!</p>`,
-    styleUrl: './sidebar.component.css',
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent { }

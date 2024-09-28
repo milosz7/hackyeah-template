@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     imports: [
         CommonModule,
     ],
-    template: `<p>conversation works!</p>`,
-    styleUrl: './conversation.component.css',
+    templateUrl: './conversation.component.html',
+    styleUrl: './conversation.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConversationComponent { }
