@@ -5,7 +5,7 @@ export interface Message {
     sender: Sender;
 }
 
-export enum Sender{
-    USER,
-    ADVISOR
+export enum Sender {
+    USER = 'USER',
+    ADVISOR = 'ADVISOR'
 }
