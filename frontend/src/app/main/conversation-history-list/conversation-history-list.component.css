@@ -1,3 +1,56 @@
 :host {
   display: block;
 }
+
+/* Reset some basic elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Stylish list styling */
+.stylish-list {
+  list-style: none;
+  padding: 0;
+}
+
+.stylish-list li {
+  margin: 0;
+}
+
+.stylish-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  padding: 20px;
+  font-size: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  height: 80px;
+}
+
+/* Adding icons or emoji at the start of each list item */
+.stylish-list li a span {
+  font-size: 32px;
+  margin-right: 15px;
+}
+
+/* Hover effect */
+.stylish-list li a:hover {
+  background-color: #e6e6e6;
+  transform: translateY(-3px);
+}
