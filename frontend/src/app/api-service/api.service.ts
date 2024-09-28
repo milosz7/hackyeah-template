@@ -14,4 +14,6 @@ export class ApiService {
   public getData(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
+
+  
 }
