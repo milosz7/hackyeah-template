@@ -193,8 +193,8 @@ def get_xml():
 
 @app.post("/submit-declaration")
 async def submit_declaration(declaration: DeclarationDTO):
+
     return {
-        "message": "Deklaracja została złożona pomyślnie!",
-        "activityDate": declaration.activityDate,
-        "submissionDate": declaration.submissionDate,
+        "message": "Deklaracja zos(tała złożona pomyślnie!",
+        "declaration": declaration
     }
