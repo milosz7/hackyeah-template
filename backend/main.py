@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import xml.etree.ElementTree as ET
 from json_to_xml import json_to_xml
-from dto.declaration import DeclarationDTO
+from dto.DeclarationDTO import DeclarationDTO
 
 app = FastAPI()
 origins = ["http://localhost:4200"]
@@ -43,3 +43,11 @@ def get_xml():
     xml = json_to_xml(json_data, "Deklaracja")
 
     return xml
+
+@app.post("/submit-declaration")
+async def submit_declaration(declaration: DeclarationDTO):
+    return {
+        "message": "Deklaracja została złożona pomyślnie!",
+        "activityDate": declaration.activityDate,
+        "submissionDate": declaration.submissionDate,
+    }
