@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+import xml.etree.ElementTree as ET
+from json_to_xml import json_to_xml
 
 app = FastAPI()
 origins = ["http://localhost:4200"]
@@ -22,3 +24,21 @@ def read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str | None = None):
     return {"item_id": item_id, "q": q}
+
+@app.get("/xml")
+def get_xml():
+    
+    json_data = '''
+    {
+        "note": {
+            "to": "dsajdvasjhdva",
+            "from": "Jani",
+            "heading": "Reminder",
+            "body": "Don't forget me this weekend!"
+        }
+    }
+    '''
+
+    json_to_xml(json_data, "dokument")
+
+    return "lolz"
