@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, EmailStr, constr, conint, validator
+from datetime import datetime
 
 class DeclarationDTO(BaseModel):
-   activityDate: datetime  # The date of the activity
+    activityDate: datetime  # The date of the activity
     submissionDate: datetime  # The date of submission
 
     @validator('activityDate')

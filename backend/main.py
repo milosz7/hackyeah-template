@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import xml.etree.ElementTree as ET
 from json_to_xml import json_to_xml
+from dto.declaration import DeclarationDTO
 
 app = FastAPI()
 origins = ["http://localhost:4200"]
@@ -39,6 +40,6 @@ def get_xml():
     }
     '''
 
-    json_to_xml(json_data, "Deklaracja")
+    xml = json_to_xml(json_data, "Deklaracja")
 
-    return "cipka"
+    return xml

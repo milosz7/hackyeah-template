@@ -13,5 +13,5 @@ def json_to_xml(json_data, root_name):
     pretty_xml = dom.toprettyxml()
 
 
-    print(pretty_xml)
+    return pretty_xml
     
