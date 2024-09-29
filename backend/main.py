@@ -5,7 +5,7 @@ from VectorDBConnector import VectorDBConnector
 from dotenv import load_dotenv, find_dotenv
 from dto import *
 
-        
+
 load_dotenv(find_dotenv())
 app = FastAPI()
 
