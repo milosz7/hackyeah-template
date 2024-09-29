@@ -1,0 +1,14 @@
+Nazwa                           Nr          xml             type                attributes          
+DATA DOKONANIA CZYNNOŚCI        4           Data            Data                poz="P_4"
+CEL ZŁOŻENIA DEKLARACJI         6           CelZlozenia     Całkowite           poz="P_6"
+PODMIOT SKŁADAJĄCY DEKLARACJĘ   7           P_7             Całkowite
+PRZEDMIOT OPODATKOWANIA         20          P_20            Całkowite
+MIEJSCE POŁOŻENIA RZECZY        21          P_21            Całkowite
+MIEJSCE DOKONANIA CZYNNOŚCI     22          P_22            Całkowite
+ZWIĘZŁE OKREŚLENIE TREŚCI       23          P_23            Tekst
+PODSTAWA OPODATKOWANIA          26          P_26            Rzeczywiste
+OBLICZONY NALEŻNY PODATEK       27          P_27            Rzeczywiste
+KWOTA NALEŻNEGO PODATKU         46          P_46            Rzeczywiste
+KWOTA PODATKU DO ZAPŁATY        53          P_53            Rzeczywiste
+LICZBA DOŁĄCZONYCH ZAŁĄCZNIKÓW  62          P_62            Całkowite
+POUCZENIA                       brak        ?               Całkowite

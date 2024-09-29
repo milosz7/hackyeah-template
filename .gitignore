@@ -4,3 +4,4 @@
 **/.angular
 __pycache__/
 *.pyc
+.idea
