@@ -1,10 +1,13 @@
+import uuid
+from datetime import datetime
+from enum import Enum
+from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict, Optional
-from VectorDBConnector import VectorDBConnector
 from dotenv import load_dotenv, find_dotenv
-from dto import *
-
+from backend.VectorDBConnector import VectorDBConnector
+from backend.dto import Declaration
 
 load_dotenv(find_dotenv())
 app = FastAPI()
