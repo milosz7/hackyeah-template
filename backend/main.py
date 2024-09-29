@@ -1,14 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import xml.etree.ElementTree as ET
-from json_to_xml import json_to_xml
-from dto.DeclarationDTO import DeclarationDTO
 from typing import List, Dict, Optional
-import uuid
-from enum import Enum
-from datetime import datetime
-from pydantic import BaseModel
+from VectorDBConnector import VectorDBConnector
+from dotenv import load_dotenv, find_dotenv
+from dto import *
 
+        
+load_dotenv(find_dotenv())
 app = FastAPI()
 
 origins = ["http://localhost:4200"]
@@ -21,6 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+vector_db = VectorDBConnector("hackyeah-pcc", "sdadas/st-polish-paraphrase-from-distilroberta")
 
 # Dictionary to hold user data and conversations
 users_conversations: Dict[uuid.UUID, Dict[uuid.UUID, "Conversation"]] = {}
@@ -173,28 +172,28 @@ def read_root():
 def read_item(item_id: int, q: str | None = None):
     return {"item_id": item_id, "q": q}
 
-@app.get("/xml")
-def get_xml():
-    
-    json_data = '''
-    {
-        "note": {
-            "to": "dsajdvasjhdva",
-            "from": "Jani",
-            "heading": "Reminder",
-            "body": "Don't forget me this weekend!"
-        }
-    }
-    '''
-
-    xml = json_to_xml(json_data, "Deklaracja")
-
-    return xml
+# @app.get("/xml")
+# def get_xml():
+#
+#     json_data = '''
+#     {
+#         "note": {
+#             "to": "dsajdvasjhdva",
+#             "from": "Jani",
+#             "heading": "Reminder",
+#             "body": "Don't forget me this weekend!"
+#         }
+#     }
+#     '''
+#
+#     xml = json_to_xml(json_data, "Deklaracja")
+#
+#     return xml
 
 @app.post("/submit-declaration")
-async def submit_declaration(declaration: DeclarationDTO):
-
+async def submit_declaration(declaration: Declaration):
     return {
-        "message": "Deklaracja zos(tała złożona pomyślnie!",
-        "declaration": declaration
+        "message": "Deklaracja została złożona pomyślnie!",
+        "activityDate": declaration.activityDate,
+        "submissionDate": declaration.submissionDate,
     }

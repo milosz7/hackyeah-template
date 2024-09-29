@@ -1,7 +1,15 @@
 from pydantic import BaseModel, EmailStr, model_validator
 from datetime import datetime
+from enum import Enum
+import uuid
 
-class DeclarationDTO(BaseModel):
+
+class MessageSource(str, Enum):
+    user = "user"
+    model = "model"
+
+
+class Declaration(BaseModel):
     Data:        datetime   # 4                                                                                                                                                                                                                                                                                                                                                                                                        
     CelZlozenia: int        # 6
     P_7:         int
@@ -47,4 +55,39 @@ class DeclarationDTO(BaseModel):
             
         # TODO rest
         
-        return self   
+        return self  
+
+
+class Message(BaseModel):
+    time: datetime
+    source: MessageSource
+    message: str
+
+
+class Conversation(BaseModel):
+    conversation_id: uuid.UUID
+    messages: list[Message]
+
+
+class User(BaseModel):
+    user_name: str
+    conversations: list[Conversation]
+
+
+dummy_conversation_id = uuid.uuid4()
+
+dummy_user = User(
+    user_name="test_user",
+    conversations=[]
+)
+
+dummy_message = Message(
+    time=datetime.now(),
+    source=MessageSource.user,
+    message="This is a dummy message"
+)
+
+dummy_conversation = Conversation(
+    conversation_id=dummy_conversation_id,
+    messages=[dummy_message]
+)
